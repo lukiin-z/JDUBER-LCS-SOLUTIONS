@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar - John Deere</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="container"> <!-- Box ao redor -->
+        <div class="register-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/John_Deere_logo.svg/1024px-John_Deere_logo.svg.png" alt="John Deere Logo">
+            <h2>Registrar</h2>
+            <form id="registerForm">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" placeholder="Digite seu nome" required>
+                <p id="nameError" class="error" style="display: none;">Nome é obrigatório.</p>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+                <p id="emailError" class="error" style="display: none;">Email é obrigatório.</p>
+
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                <p id="passwordError" class="error" style="display: none;">Senha é obrigatória.</p>
+
+                <button type="submit" class="register-btn">Registrar</button>
+            </form>
+            <div class="footer">
+                <p>Já tem uma conta? <a href="index.html">Faça login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            let valid = true;
+
+            if (name === "") {
+                document.getElementById('nameError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('nameError').style.display = 'none';
+            }
+
+            if (email === "") {
+                document.getElementById('emailError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            if (password === "") {
+                document.getElementById('passwordError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('passwordError').style.display = 'none';
+            }
+
+            if (valid) {
+                try {
+                    const response = await fetch('http://localhost:5000/api/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name, email, password })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert('Usuário registrado com sucesso! Faça login.');
+                        window.location.href = 'index.html';
+                    } else {
+                        alert(data.message || 'Erro ao registrar usuário.');
+                    }
+                } catch (error) {
+                    console.error('Erro na requisição de registro:', error);
+                    alert('Erro ao conectar com o servidor.');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

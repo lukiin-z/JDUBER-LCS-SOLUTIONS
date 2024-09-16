@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esqueci a Senha - JDUber</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <!-- Container de Esqueci a Senha -->
+    <div class="container">
+        <h2>Esqueci a Senha</h2>
+        <form id="forgotPasswordForm">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+            
+            <button type="submit" class="btn">Enviar link de redefinição</button>
+        </form>
+
+        <a href="index.html" class="forgot-password-link">Voltar para Login</a>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 JDUber - Todos os direitos reservados.</p>
+        <nav>
+            <a href="#">Termos de Uso</a> |
+            <a href="#">Política de Privacidade</a> |
+            <a href="#">Contato</a>
+        </nav>
+    </footer>
+
+    <script>
+        document.getElementById('forgotPasswordForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Previne o envio padrão do formulário
+
+            const email = document.getElementById('email').value.trim();
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/forgot-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email }) // Envia o e-mail
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Link de redefinição enviado para seu email.');
+                } else {
+                    alert(data.message || 'Erro ao enviar o link.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Erro ao conectar com o servidor.');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações de Conta</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Configurações de Conta</h2>
+        <form id="configForm">
+            <div class="input-container">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="name" name="name" placeholder="Atualizar Nome" required>
+            </div>
+            <div class="input-container">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" id="email" name="email" placeholder="Atualizar E-mail" required>
+            </div>
+            <button type="submit">Salvar Alterações</button>
+        </form>
+        <button id="logoutBtn">Logout</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('http://localhost:5000/api/user/me', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('name').value = data.name;
+                document.getElementById('email').value = data.email;
+            })
+            .catch(error => console.error('Erro ao buscar dados do usuário:', error));
+        });
+
+        document.getElementById('configForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            fetch('http://localhost:5000/api/user/update', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify({ name, email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Dados atualizados com sucesso!');
+                } else {
+                    alert('Erro ao atualizar os dados.');
+                }
+            })
+            .catch(error => console.error('Erro ao atualizar os dados:', error));
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('token');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

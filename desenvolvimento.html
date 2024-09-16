@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coleta e Entrega</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">John Deere Project</a>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="desenvolvimento.html">Mapa</a></li>
+                <li><a href="configuracoes.html">Configurações</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Escolha uma Ação</h1>
+        <button id="btnColeta" class="btn">COMEÇAR COLETA</button>
+        <button id="btnEntrega" class="btn">COMEÇAR ENTREGA</button>
+    </div>
+    
+    <!-- Notificação -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Função para mostrar notificação
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById("toast");
+            toast.className = "toast " + (isSuccess ? "success" : "error");
+            toast.innerText = message;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 3000);
+        }
+
+        // Função genérica para fazer requisições com JWT
+        async function fazerRequisicao(url) {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                showToast('Você precisa estar logado.', false);
+                window.location.href = 'index.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showToast(data.message || 'Ação realizada com sucesso!');
+                } else {
+                    showToast(data.message || 'Erro ao realizar a ação.', false);
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                showToast('Erro ao conectar com o servidor.', false);
+            }
+        }
+
+        document.getElementById('btnColeta').addEventListener('click', () => {
+            fazerRequisicao('http://localhost:5000/api/coleta');
+        });
+
+        document.getElementById('btnEntrega').addEventListener('click', () => {
+            fazerRequisicao('http://localhost:5000/api/entrega');
+        });
+    </script>
+
+    <div id="map" style="height: 500px; width: 100%; display: none;"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCajlY0BZP9LwxIGat-DX4AOz4VrOX0-Yc&callback=initMap" async defer></script>
+
+    <script>
+        let map;
+        function initMap(lat = -23.5505, lng = -46.6333) {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: lat, lng: lng },
+                zoom: 12,
+            });
+        }
+
+        function showMap() {
+            document.getElementById('map').style.display = 'block';
+            initMap();
+        }
+
+        document.getElementById('btnColeta').addEventListener('click', function() {
+            showMap();
+        });
+
+        document.getElementById('btnEntrega').addEventListener('click', function() {
+            showMap();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - John Deere</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <!-- Container de Login -->
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="Digite seu email" required>
+            
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+            
+            <button type="submit" class="btn">Entrar</button>
+            <a href="registro.html" class="btn register-btn">Registrar</a>
+
+            <!-- Link para "Esqueci minha senha" -->
+            <p>
+                <a href="esqueci-senha.html" class="forgot-password-link">Esqueci minha senha</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2024 JDUber - Todos os direitos reservados.</p>
+        <nav>
+            <a href="#">Termos de Uso</a> |
+            <a href="#">Política de Privacidade</a> |
+            <a href="#">Contato</a>
+        </nav>
+    </footer>
+
+    <script>
+        // Lógica para enviar o formulário de login
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Previne o envio padrão do formulário
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password }) // Envia os dados de login
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Login bem-sucedido!');
+                    localStorage.setItem('token', data.token); // Salva o token
+                    window.location.href = 'desenvolvimento.html'; // Redireciona
+                } else {
+                    alert(data.message || 'Erro ao fazer login.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição de login:', error);
+                alert('Erro ao conectar com o servidor.');
+            }
+        });
+    </script>
+</body>
+</html>

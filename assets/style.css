@@ -1,0 +1,265 @@
+/* Importando a fonte Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(270deg, #e0f0e9, #ffffff); /* Fundo com gradiente suave */
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+    margin: 0;
+    padding-top: 60px; /* Compensa a altura do cabeçalho fixo */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    margin: auto;
+    animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #367C2B;
+    font-weight: 700;
+}
+
+/* Ajuste para garantir que os inputs e botões tenham o mesmo tamanho */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+.btn,
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* Garante que o padding e a borda sejam incluídos no cálculo da largura */
+}
+
+/* Estilos padrão sem validação (sem borda vermelha até que o campo seja interagido) */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    border-color: #ddd; /* Borda padrão */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Exibe a borda verde ao focar nos campos */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #367C2B;
+    box-shadow: 0 0 8px rgba(54, 124, 43, 0.3);
+    outline: none; /* Remove o outline padrão */
+}
+
+/* Só exibe a borda vermelha se o campo for inválido após interação (foco) */
+input[type="text"]:focus:invalid,
+input[type="email"]:focus:invalid,
+input[type="password"]:focus:invalid {
+    border-color: #e74c3c;
+    box-shadow: 0 0 8px rgba(231, 76, 60, 0.3);
+}
+
+/* Botões */
+.btn,
+.register-btn {
+    background: linear-gradient(45deg, #367C2B, #285D21);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 5px #1d4a19;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Efeito ao passar o mouse e clicar no botão */
+.btn:hover,
+.register-btn:hover {
+    background: linear-gradient(45deg, #285D21, #1d4a19);
+    transform: translateY(-3px);
+}
+
+.btn:active,
+.register-btn:active {
+    transform: translateY(3px);
+}
+
+.register-btn {
+    font-weight: normal;
+    text-decoration: none;
+    margin-bottom: 0;
+}
+
+/* NavBar */
+.navbar {
+    background-color: #367C2B;
+    padding: 15px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar-logo {
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar-menu a:hover {
+    color: #f1c232;
+}
+
+/* Rodapé */
+footer {
+    position: relative;
+    bottom: 0;
+    background-color: #285D21;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: auto;
+}
+
+footer p, footer a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+footer a:hover {
+    color: #d4edda;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .container {
+        width: 90%;
+    }
+}
+.forgot-password-link {
+    color: #367C2B;
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    margin-top: 50px;
+}
+
+.forgot-password-link:hover {
+    color: #285D21;
+}
+
+/* Grupo de inputs com margem e espaçamento */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #367C2B; /* Cor verde do projeto */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Input focado */
+.input-group input:focus {
+    border-color: #367C2B;
+    box-shadow: 0 0 8px rgba(54, 124, 43, 0.3);
+    outline: none;
+}
+
+/* Botão de redefinir senha */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #367C2B, #285D21);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Efeito ao passar o mouse no botão */
+.btn:hover {
+    background: linear-gradient(45deg, #285D21, #1d4a19);
+    transform: translateY(-3px);
+}
+
+/* Botão ativo */
+.btn:active {
+    transform: translateY(3px);
+}
+
