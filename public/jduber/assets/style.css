@@ -1,9 +1,9 @@
-/* Importando a fonte Roboto */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+/* Importando a fonte Uber */
+@import url('https://fonts.googleapis.com/css2?family=Uber+Move&display=swap');
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(270deg, #e0f0e9, #ffffff); /* Fundo com gradiente suave */
+    font-family: 'Uber Move', sans-serif;
+    background: linear-gradient(270deg, #121212, #1a1a1a); /* Fundo escurecido */
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
     margin: 0;
@@ -20,10 +20,10 @@ body {
 }
 
 .container {
-    background-color: #fff;
+    background-color: #181818;
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     width: 350px;
     text-align: center;
     margin: auto;
@@ -44,7 +44,7 @@ body {
 h2 {
     font-size: 28px;
     margin-bottom: 20px;
-    color: #367C2B;
+    color: #FFFFFF;
     font-weight: 700;
 }
 
@@ -57,46 +57,32 @@ input[type="password"],
     width: 100%;
     padding: 12px;
     margin-bottom: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #333;
     border-radius: 5px;
     font-size: 16px;
-    box-sizing: border-box; /* Garante que o padding e a borda sejam incluídos no cálculo da largura */
-}
-
-/* Estilos padrão sem validação (sem borda vermelha até que o campo seja interagido) */
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    border-color: #ddd; /* Borda padrão */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #282828;
 }
 
 /* Exibe a borda verde ao focar nos campos */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
-    border-color: #367C2B;
-    box-shadow: 0 0 8px rgba(54, 124, 43, 0.3);
-    outline: none; /* Remove o outline padrão */
-}
-
-/* Só exibe a borda vermelha se o campo for inválido após interação (foco) */
-input[type="text"]:focus:invalid,
-input[type="email"]:focus:invalid,
-input[type="password"]:focus:invalid {
-    border-color: #e74c3c;
-    box-shadow: 0 0 8px rgba(231, 76, 60, 0.3);
+    border-color: #1DB954;
+    box-shadow: 0 0 8px rgba(29, 185, 84, 0.3);
+    outline: none;
 }
 
 /* Botões */
 .btn,
 .register-btn {
-    background: linear-gradient(45deg, #367C2B, #285D21);
+    background: linear-gradient(45deg, #1DB954, #1a1a1a);
     color: #fff;
     border: none;
     cursor: pointer;
     font-weight: 500;
-    box-shadow: 0 5px #1d4a19;
+    box-shadow: 0 5px #0f7a40;
     transition: background 0.3s ease, transform 0.2s ease;
     text-align: center;
     text-decoration: none;
@@ -105,7 +91,7 @@ input[type="password"]:focus:invalid {
 /* Efeito ao passar o mouse e clicar no botão */
 .btn:hover,
 .register-btn:hover {
-    background: linear-gradient(45deg, #285D21, #1d4a19);
+    background: linear-gradient(45deg, #17a74b, #111);
     transform: translateY(-3px);
 }
 
@@ -122,7 +108,7 @@ input[type="password"]:focus:invalid {
 
 /* NavBar */
 .navbar {
-    background-color: #367C2B;
+    background-color: #000;
     padding: 15px;
     color: white;
     font-size: 18px;
@@ -155,14 +141,14 @@ input[type="password"]:focus:invalid {
 }
 
 .navbar-menu a:hover {
-    color: #f1c232;
+    color: #1DB954;
 }
 
 /* Rodapé */
 footer {
     position: relative;
     bottom: 0;
-    background-color: #285D21;
+    background-color: #000;
     color: white;
     padding: 20px;
     text-align: center;
@@ -178,7 +164,7 @@ footer p, footer a {
 }
 
 footer a:hover {
-    color: #d4edda;
+    color: #1DB954;
 }
 
 /* Responsividade */
@@ -198,7 +184,7 @@ footer a:hover {
 }
 
 .forgot-password-link {
-    color: #367C2B;
+    color: #1DB954;
     text-decoration: none;
     font-size: 14px;
     display: block;
@@ -206,7 +192,7 @@ footer a:hover {
 }
 
 .forgot-password-link:hover {
-    color: #285D21;
+    color: #17a74b;
 }
 
 /* Grupo de inputs com margem e espaçamento */
@@ -218,13 +204,13 @@ footer a:hover {
     display: block;
     font-weight: 500;
     margin-bottom: 8px;
-    color: #367C2B; /* Cor verde do projeto */
+    color: #1DB954;
 }
 
 .input-group input {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #333;
     border-radius: 5px;
     font-size: 16px;
     box-sizing: border-box;
@@ -233,8 +219,8 @@ footer a:hover {
 
 /* Input focado */
 .input-group input:focus {
-    border-color: #367C2B;
-    box-shadow: 0 0 8px rgba(54, 124, 43, 0.3);
+    border-color: #1DB954;
+    box-shadow: 0 0 8px rgba(29, 185, 84, 0.3);
     outline: none;
 }
 
@@ -242,7 +228,7 @@ footer a:hover {
 .btn {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(45deg, #367C2B, #285D21);
+    background: linear-gradient(45deg, #1DB954, #1a1a1a);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -255,7 +241,7 @@ footer a:hover {
 
 /* Efeito ao passar o mouse no botão */
 .btn:hover {
-    background: linear-gradient(45deg, #285D21, #1d4a19);
+    background: linear-gradient(45deg, #17a74b, #111);
     transform: translateY(-3px);
 }
 
